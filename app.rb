@@ -156,24 +156,23 @@ end
 
 post "/search" do
   key = params[:searchKey]
-  if params[:search_title] == "title"
-    if params[:search_language] == "language"
-      if params[:search_framework] == "framework"
-        if params[:search_description] == "description"
-          @posts = Post.all.where("title LIKE :args1 OR language LIKE :args2 OR framework LIKE :args3 OR description LIKE :args4", args1: "%#{key}%", args2: "%#{key}%", args3: "%#{key}%", args4: "%#{key}%").all
-        else 
-          @posts = Post.all.where("title LIKE :args1 OR language LIKE :args2 OR framework LIKE :args3", args1: "%#{key}%", args2: "%#{key}%", args3: "%#{key}%").all
-        end
-      else 
-        @posts = Post.all.where("title LIKE :args1 OR language LIKE :args2", args1: "%#{key}%", args2: "%#{key}%").all
-      end
+  keys = key.split(/[[:blank:]]+/)
+  
+  @posts = Post.all
+  logger.info keys
+  keys.each do |k|
+    if params[:search_option].count == 4
+      @posts = @posts.where("#{params[:search_option][0]} LIKE '%#{k}%' OR #{params[:search_option][1]} LIKE '%#{k}%' OR #{params[:search_option][2]} LIKE '%#{k}%' OR #{params[:search_option][3]} LIKE '%#{k}%'").all
+    elsif params[:search_option].count == 3
+      @posts = @posts.where("#{params[:search_option][0]} LIKE '%#{k}%' OR #{params[:search_option][1]} LIKE '%#{k}%' OR #{params[:search_option][2]} LIKE '%#{k}%'").all
+    elsif params[:search_option].count == 2
+      @posts = @posts.where("#{params[:search_option][0]} LIKE '%#{k}%' OR #{params[:search_option][1]} LIKE '%#{k}%'").all
+    elsif params[:search_option].count == 1
+      @posts = @posts.where("#{params[:search_option][0]} LIKE '%#{k}%'").all
     else 
-      @posts = Post.all.where("title LIKE :args1", args1: "%#{key}%").all
+      @posts = Post.none
     end
-  else 
-    @posts = Post.none
   end
-  # todo ここをなんとかする
   @posts = @posts.order(id: :DESC)
   slim :index
 end
