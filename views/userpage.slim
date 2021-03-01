@@ -1,0 +1,48 @@
+link rel="stylesheet" href="/sass/userpage.css"
+
+.mainContent
+  .wrapper
+    .userProfileContainer
+      .topWrapper
+        img src="/img/testImage.png" class="profileImage"
+        h3 class="username" @#{@user.name}
+        h4 class="totalLikes" Total likes: 12
+        hr class="line"
+        .dataContainer
+          .wrapper 
+            p 2 
+            p posts
+          .wrapper 
+            p 14 
+            p follows
+          .wrapper 
+            p 18
+            p followers
+      .bottomWrapper
+    .postContainer
+      - @user.posts.each do |p|
+        hr class="line"
+        .post 
+          .authorContainer
+            img src="/img/testImage.png" 
+            p class="username" @#{p.user.name}
+            p class="date" = p.created_at
+          h2 = p.title 
+          span
+            p language：
+            p class="language" = Language.find_by(id: p.language_id).language
+            p class="version" = p.language_version
+          span
+            p framework dependency：
+            p = p.framework
+          p = p.description
+          span
+            p inputs：
+            p = p.inputs
+          span 
+            p output type：
+            p = p.output_type
+          .editor
+            pre = p.content
+          a class="copyButton" Copy
+          

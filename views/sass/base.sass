@@ -1,0 +1,123 @@
+
+
+$mainColor: rgb(239, 71, 111)
+$whiteColor: #E3E4DB
+$mainFont: a-otf-ud-reimin-pr6n, sans-serif
+
+$navigationSmallWrapperHeight: 32px
+$mainWidth: 1200px
+
+
+*
+  margin: 0
+  padding: 0
+  border: 0
+  box-sizing: border-box
+  background-repeat: no-repeat
+  font-family: $mainFont
+  font-weight: 1000
+  font-style: normal
+  position: relative
+  
+html
+  width: 100%
+
+body
+  width: 100%
+  background-color: $whiteColor
+  
+.allContainer
+  width: 100%
+
+.screenCover
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 999
+  display: none
+  width: 100vw
+  height: 100vh
+  
+.navigationContainer
+  width: 100%
+  height: 60px
+  background-color: $mainColor
+  .wrapper
+    position: relative
+    height: inherit
+    max-width: $mainWidth
+    margin: 0 auto
+    display: flex
+    align-items: center
+    justify-content: space-between
+    .smallWrapper
+      position: relative
+      display: flex
+      align-items: center
+      justify-content: center
+      height: $navigationSmallWrapperHeight
+      a 
+        text-decoration: none
+      .searchInput
+        height: 100%
+        margin: 0 24px
+        width: 260px
+        position: relative
+        z-index: 1000
+      .searchOptionContainer
+        position: absolute
+        top: 100%
+        left: 0
+        display: none
+        width: 260px
+        z-index: 1000
+        background-color: white
+        margin: 0 24px
+        .line 
+          width: 100%
+          border-top: 1px solid lightgray
+        label
+          width: 100%
+          display: flex
+          align-items: center
+          justify-content: flex-start
+          input
+            margin: 0 10px
+            height: 40px
+            appearance: checkbox
+            -webkit-appearance: checkbox
+      .mainTitle
+        color: $whiteColor
+        font-size: 24px
+      .newPostButton
+        height: 24px
+        width: 68px
+        background-color: $whiteColor
+      .profileImage
+        height: $navigationSmallWrapperHeight
+        width: $navigationSmallWrapperHeight
+        border-radius: 50%
+        margin-left: 20px
+      .signupButton
+        height: 24px
+        width: 68px
+        background-color: $whiteColor
+      .loginButton
+        height: 24px
+        width: 68px
+        background-color: $whiteColor
+        margin-left: 20px
+      .profileDropdownContainer
+        position: absolute
+        top: 100%
+        right: 0
+        display: none
+        width: 200px
+        z-index: 1000
+        .logoutButton
+          width: 100%
+        
+    
+    
+        
+

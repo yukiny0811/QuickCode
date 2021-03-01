@@ -1,0 +1,93 @@
+
+
+$mainColor: rgb(239, 71, 111)
+$whiteColor: #E3E4DB
+$mainFont: a-otf-ud-reimin-pr6n, sans-serif
+
+$navigationSmallWrapperHeight: 32px
+$mainWidth: 1200px
+
+.mainContent
+  width: 100%
+  .wrapper
+    width: $mainWidth
+    margin: 30px auto
+    display: flex
+    align-items: flex-start
+    justify-content: space-between
+    .leftWrapper
+      width: 200px
+      .linkContainer.selected
+        min-height: 50px
+        width: 100%
+        display: flex
+        align-items: center
+        justify-content: flex-start
+        border-radius: 10px 0 0 10px 
+        background-color: $mainColor
+        a 
+          margin-left: 20px
+          text-decoration: none
+          color: white
+      .linkContainer
+        min-height: 50px
+        width: 100%
+        display: flex
+        align-items: center
+        justify-content: flex-start
+        border-radius: 10px 0 0 10px 
+        background-color: $whiteColor
+        a 
+          margin-left: 20px
+          text-decoration: none
+          color: gray
+    .rightWrapper
+      width: $mainWidth - 200px
+      background-color: white
+      .line 
+        width: 100%
+        border-top: 1px solid lightgray
+      .post
+        margin: 16px 12px
+        .authorContainer
+          margin: 6px 0
+          display: flex
+          justify-content: flex-start
+          align-items: flex-end
+          img
+            width: 28px 
+            height: 28px
+            border-radius: 50%
+          .username 
+            margin-left: 10px
+            color: #333333
+          .date 
+            margin-left: 10px
+            color: gray
+            font-size: 0.8em
+        span 
+          display: flex
+          align-items: flex-end
+          justify-content: flex-start
+          p 
+            color: gray
+        p 
+          color: #333333
+        .editor 
+          width: 100%
+          height: auto
+          border: none
+          pre 
+            padding: 16px
+            background-color: #eeeeee
+            color: #333333
+        .copyButton
+          background-color: $mainColor
+          color: white
+          padding: 5px
+          border-radius: 10%
+          
+          
+          
+          
+        

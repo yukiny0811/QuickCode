@@ -1,0 +1,13 @@
+link rel="stylesheet" href="/sass/newpost.css"
+
+.mainContent
+  form action="/#{current_user.id}/post/new" method="post"
+    input class="title" type="text" name="title" placeholder="title"
+    input class="language" type="text" name="language" placeholder="language"
+    input class="language-version" type="text" name="language_version" placeholder="language version"
+    input class="framework" type="text" name="framework" placeholder="framework dependency"
+    input class="inputs" type="text" name="inputs" placeholder="inputs"
+    input class="outputs" type="text" name="outputs" placeholder="output type"
+    textarea class="content" name="content" placeholder="code"
+    textarea class="description" name="description" placeholder="description"
+    input type="submit" value="投稿"
