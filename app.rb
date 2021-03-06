@@ -1,93 +1,10 @@
-require 'bundler/setup'
-Bundler.require
-require 'sinatra/reloader' if development?
-require 'sinatra/cookies'
-require "./models/models.rb"
-require "./models/user.rb"
-require "./models/post.rb"
-require "./models/language.rb"
-require "./models/like.rb"
-require "./models/follow.rb"
-require "sass"
-require "pry"
-
-enable :sessions
-
-set :sass, {:style => :compact }
-
-helpers do
-  
-  def is_user_logged_in
-    if session[:user]
-      return true
-    else 
-      return false
-    end
-  end
-  
-  # def user_session_check
-  #   if not session[:user]
-  #     redirect "/"
-  #   end
-  # end
-  
-  def current_user 
-    if session[:user]
-      return User.find_by(id: session[:user])
-    end
-  end
-  
-  def convert_image_source(img)
-    base64 = Base64.encode64(img).gsub(/\n/, "") +  "\n"
-    return "data:"+ "image/png" + ";base64," + base64
-  end
-  
-  def like_bg_color(isLiked)
-    if isLiked
-      return "rgb(239, 71, 111)"
-    else 
-      return "white"
-    end
-  end
-  
-  def like_tx_color(isLiked)
-    if isLiked
-      return "white"
-    else 
-      return "rgb(239, 71, 111)"
-    end
-  end
-  
-  def following_bg_color(isLiked)
-    if isLiked
-      return "rgb(239, 71, 111)"
-    else 
-      return "white"
-    end
-  end
-  
-  def following_tx_color(isLiked)
-    if isLiked
-      return "white"
-    else 
-      return "rgb(239, 71, 111)"
-    end
-  end
-  
-end
+require "./appRequires"
 
 not_found do
   redirect "/"
 end
 
 # get requests -------
-
-# get "/delete" do
-#   logger.info Like.all
-  # slim :index
-  # slim :newpost
-  # binding.pry
-# end
 
 # main page
 get "/" do
@@ -97,22 +14,23 @@ end
 
 # signup page
 get "/signup" do
-  if not is_user_logged_in
-    slim :signup
-  else 
+  if is_user_logged_in
     redirect "/"
+  else 
+    slim :signup
   end
 end
 
 # login page 
 get "/login" do
-  if not is_user_logged_in
-    slim :login
-  else 
+  if is_user_logged_in
     redirect "/"
+  else 
+    slim :login
   end
 end
 
+# userpage
 get "/:username" do
   @user = User.find_by(name: params[:username])
   if not @user 
@@ -123,8 +41,11 @@ end
 
 # new post 
 get "/:username/post/new" do
-  user_session_check
-  slim :newpost
+  if is_user_logged_in
+    slim :newpost
+  else
+    redirect "/"
+  end
 end
 
 # post requests -------
@@ -177,13 +98,16 @@ post "/login" do
 end
 
 post "/:username/post/new" do
+  if not current_user
+    return
+  end
   if Language.find_by(language: params[:language]).nil?
     Language.create(
       language: params[:language]
     )
   end
   Post.create(
-    user_id: current_user.id,
+    user_id: current_user_id,
     content: params[:content],
     description: params[:description],
     output_type: params[:outputs],
@@ -220,8 +144,6 @@ post "/search" do
 end
 
 post "/like/:post_id" do
-  logger.info session[:user]
-  logger.info params[:post_id]
   if Like.find_by(user_id: session[:user], post_id: params[:post_id]).present?
     Like.find_by(user_id: session[:user], post_id: params[:post_id]).destroy
     return false
@@ -232,7 +154,6 @@ post "/like/:post_id" do
     )
     return true
   end
-  logger.info Like.all
 end
 
 post "/follow/:to_user_id" do
@@ -279,4 +200,8 @@ end
 
 get "/sass/searchResult.css" do
   sass :'sass/searchResult'
+end
+
+get "/sass/post.css" do
+  sass :'sass/post'
 end
