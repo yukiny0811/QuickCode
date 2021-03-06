@@ -15,6 +15,19 @@ get "/" do
   slim :index
 end
 
+get "/timeline" do
+  if not is_user_logged_in
+    redirect "/"
+  end
+  followings = Follow.where(follow_from: session[:user])
+  @posts = Post.none
+  followings.each do |f|
+    @posts = @posts.or(Post.where(user_id: f.follow_to))
+  end
+  @posts = @posts.order(id: :DESC)
+  slim :index
+end
+
 # signup page
 get "/signup" do
   if is_user_logged_in
