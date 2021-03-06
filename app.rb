@@ -25,7 +25,7 @@ get "/timeline" do
     @posts = @posts.or(Post.where(user_id: f.follow_to))
   end
   @posts = @posts.order(id: :DESC)
-  slim :index
+  slim :timeline
 end
 
 # signup page

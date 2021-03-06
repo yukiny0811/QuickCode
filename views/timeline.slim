@@ -1,0 +1,14 @@
+link rel="stylesheet" href="/sass/index.css"
+
+.mainContent
+  .wrapper
+    .leftWrapper
+      .linkContainer
+        a href="/" 新着
+      .linkContainer.selected
+        a href="/timeline" タイムライン
+    .rightWrapper
+      - @posts.each do |p|
+        - @p = p
+        hr.line
+        == slim :'components/post'
