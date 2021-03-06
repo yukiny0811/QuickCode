@@ -64,6 +64,18 @@ get "/:username/post/new" do
   end
 end
 
+get "/:username/follows" do
+  @user = User.find_by(name: params[:username])
+  @follows = Follow.where(follow_from: @user.id)
+  slim :follows
+end
+
+get "/:username/followers" do
+  @user = User.find_by(name: params[:username])
+  @follows = Follow.where(follow_to: @user.id)
+  slim :followers
+end
+
 # post requests -------
 
 # signup

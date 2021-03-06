@@ -1,0 +1,10 @@
+link rel="stylesheet" href="/sass/post.css"
+
+hr class="line"
+.post 
+  .authorContainer
+    a href="/#{User.find_by(id: @f.follow_from).name}"
+      img src="/img/testImage.png" 
+    a href="/#{User.find_by(id: @f.follow_from).name}"
+      p.username @#{User.find_by(id: @f.follow_from).name}
+  
