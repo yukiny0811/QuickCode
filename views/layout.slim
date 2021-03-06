@@ -15,38 +15,38 @@ html lang="ja"
         .wrapper
           .smallWrapper
             a href="/"
-              h1 class="mainTitle" QuickCode
+              h1.mainTitle QuickCode
             form action="/search" method="post"
-              input class="searchInput" type="search" placeholder="search" name="searchKey"
+              input.searchInput type="search" placeholder="search" name="searchKey"
               .searchOptionContainer
-                hr class="line"
+                hr.line
                 label
                   input type="checkbox" name="search_option[]" value="title" checked="checked" title
-                hr class="line"
+                hr.line
                 label
                   input type="checkbox" name="search_option[]" value="language" language 
-                hr class="line"
+                hr.line
                 label
                   input type="checkbox" name="search_option[]" value="framework" framework
-                hr class="line"
+                hr.line
                 label
                   input type="checkbox" name="search_option[]" value="description" description
           .smallWrapper
             - if is_user_logged_in
               form action="/#{current_user.name}/post/new" method="get"
-                input type="submit" value="投稿" class="newPostButton"
-              img src="/img/testImage.png" class="profileImage"
+                input.newPostButton type="submit" value="投稿"
+              img.profileImage src="/img/testImage.png"
               .profileDropdownContainer
                 hr.line
                 form action="/logout" method="post"
-                  input type="submit" value="ログアウト" class="logoutButton"
+                  input.logoutButton type="submit" value="ログアウト"
                 hr.line
                 form action="/#{current_user.name}" method="get"
-                  input type="submit" value="マイページ" class="userpageButton"
+                  input.userpageButton type="submit" value="マイページ"
                 hr.line
             - else 
               form action="/signup" method="get"
-                input type="submit" value="新規登録" class="signupButton"
+                input.signupButton type="submit" value="新規登録"
               form action="/login" method="get"
-                input type="submit" value="ログイン" class="loginButton"
+                input.loginButton type="submit" value="ログイン"
       == yield

@@ -6,13 +6,13 @@ hr class="line"
     a href="/#{@p.user.name}"
       img src="/img/testImage.png" 
     a href="/#{@p.user.name}"
-      p class="username" @#{@p.user.name}
-    p class="date" = @p.created_at
+      p.username @#{@p.user.name}
+    p.date = @p.created_at
   h2 = @p.title 
   span
     p language：
-    p class="language" = Language.find_by(id: @p.language_id).language
-    p class="version" = @p.language_version
+    p.language = Language.find_by(id: @p.language_id).language
+    p.version = @p.language_version
   span
     p framework dependency：
     p = @p.framework
@@ -25,6 +25,7 @@ hr class="line"
     p = @p.output_type
   .editor
     pre = @p.content
-  a class="copyButton" Copy
+  a.copyButton Copy
   - if session[:user] && @p.user.id != session[:user]
     a.likeButton id="#{@p.id}like" style="background-color: #{like_bg_color(Like.find_by(user_id: session[:user], post_id: @p.id).present?)}; color: #{like_tx_color(Like.find_by(user_id: session[:user], post_id: @p.id).present?)};" Like!
+  

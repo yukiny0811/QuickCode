@@ -4,10 +4,10 @@ link rel="stylesheet" href="/sass/userpage.css"
   .wrapper
     .userProfileContainer
       .topWrapper
-        img src="/img/testImage.png" class="profileImage"
-        h3 class="username" @#{@user.name}
+        img.profileImage src="/img/testImage.png"
+        h3.username @#{@user.name}
         / h4 class="totalLikes" Total likes: #{Like.where(user_id: @user.id)}
-        hr class="line"
+        hr.line
         .dataContainer
           .wrapper 
             p = @user.posts.count
