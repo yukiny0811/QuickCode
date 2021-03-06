@@ -58,6 +58,22 @@ helpers do
     end
   end
   
+  def following_bg_color(isLiked)
+    if isLiked
+      return "rgb(239, 71, 111)"
+    else 
+      return "white"
+    end
+  end
+  
+  def following_tx_color(isLiked)
+    if isLiked
+      return "white"
+    else 
+      return "rgb(239, 71, 111)"
+    end
+  end
+  
 end
 
 not_found do
@@ -217,6 +233,19 @@ post "/like/:post_id" do
     return true
   end
   logger.info Like.all
+end
+
+post "/follow/:to_user_id" do
+  if Follow.find_by(follow_from: session[:user], follow_to: params[:to_user_id]).present?
+    Follow.find_by(follow_from: session[:user], follow_to: params[:to_user_id]).destroy
+    return false
+  else
+    Follow.create(
+      follow_from: session[:user],
+      follow_to: params[:to_user_id]
+    )
+    return true
+  end
 end
 
 

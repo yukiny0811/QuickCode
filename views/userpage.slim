@@ -18,6 +18,8 @@ link rel="stylesheet" href="/sass/userpage.css"
           .wrapper 
             p = Follow.where(follow_to: @user.id).count
             p followers
+        - if session[:user] && @user.id != session[:user]
+          a.followButton id="#{@user.id}user" style="background-color: #{following_bg_color(Follow.find_by(follow_from: session[:user], follow_to: @user.id).present?)}; color: #{following_tx_color(Follow.find_by(follow_from: session[:user], follow_to: @user.id).present?)};" Follow
       .bottomWrapper
     .postContainer
       - @user.posts.each do |p|

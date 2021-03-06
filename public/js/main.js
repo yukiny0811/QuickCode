@@ -44,6 +44,33 @@ window.onload = function() {
     });
   })
   
+  $(document).on("click", ".followButton", function() {
+    let id = parseInt($(this).attr("id"))
+    console.log($(this).css("background-color"))
+    if ($(this).css("background-color") == "rgb(255, 255, 255)") {
+      $(this).css("background-color", "rgb(239, 71, 111)")
+      $(this).css("color", "rgb(255, 255, 255)")
+    } else {
+      $(this).css("background-color", "rgb(255, 255, 255)")
+      $(this).css("color", "rgb(239, 71, 111)")
+    }
+    $.ajax("/follow/" + id.toString(), {
+    	type: "POST",
+    	data: {},
+    	datatype: "json"
+    }).done (function(response) {
+      
+    }).fail (function(){
+      if ($(this).css("background-color") == "white") {
+        $(this).css("background-color", "rgb(239, 71, 111)")
+        $(this).css("color", "white")
+      } else {
+        $(this).css("background-color", "white")
+        $(this).css("color", "rgb(239, 71, 111)")
+      }
+    });
+  })
+  
   
   
   
