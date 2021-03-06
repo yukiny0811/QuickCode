@@ -28,4 +28,5 @@ hr class="line"
   a.copyButton Copy
   - if session[:user] && @p.user.id != session[:user]
     a.likeButton id="#{@p.id}like" style="background-color: #{like_bg_color(Like.find_by(user_id: session[:user], post_id: @p.id).present?)}; color: #{like_tx_color(Like.find_by(user_id: session[:user], post_id: @p.id).present?)};" Like!
+  p.likeCount #{Like.where(post_id: @p.id).count} likes
   
