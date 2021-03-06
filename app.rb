@@ -1,3 +1,6 @@
+require 'bundler/setup'
+Bundler.require
+
 require "./appRequires"
 
 not_found do
