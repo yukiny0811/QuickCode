@@ -6,3 +6,5 @@ mig:
 	rbenv exec bundle exec rake db:migrate
 create:
 	rbenv exec bundle exec rake db:create_migration NAME=${NAME}
+seed:
+	rbenv exec bundle exec rake db:seed

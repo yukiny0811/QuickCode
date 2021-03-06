@@ -6,43 +6,22 @@ link rel="stylesheet" href="/sass/userpage.css"
       .topWrapper
         img src="/img/testImage.png" class="profileImage"
         h3 class="username" @#{@user.name}
-        h4 class="totalLikes" Total likes: 12
+        / h4 class="totalLikes" Total likes: #{Like.where(user_id: @user.id)}
         hr class="line"
         .dataContainer
           .wrapper 
-            p 2 
+            p = @user.posts.count
             p posts
           .wrapper 
-            p 14 
+            p = Follow.where(follow_from: @user.id).count
             p follows
           .wrapper 
-            p 18
+            p = Follow.where(follow_to: @user.id).count
             p followers
       .bottomWrapper
     .postContainer
       - @user.posts.each do |p|
-        hr class="line"
-        .post 
-          .authorContainer
-            img src="/img/testImage.png" 
-            p class="username" @#{p.user.name}
-            p class="date" = p.created_at
-          h2 = p.title 
-          span
-            p language：
-            p class="language" = Language.find_by(id: p.language_id).language
-            p class="version" = p.language_version
-          span
-            p framework dependency：
-            p = p.framework
-          p = p.description
-          span
-            p inputs：
-            p = p.inputs
-          span 
-            p output type：
-            p = p.output_type
-          .editor
-            pre = p.content
-          a class="copyButton" Copy
+        - @p = p
+        hr.line
+        == slim :'components/post'
           

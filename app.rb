@@ -6,7 +6,10 @@ require "./models/models.rb"
 require "./models/user.rb"
 require "./models/post.rb"
 require "./models/language.rb"
+require "./models/like.rb"
+require "./models/follow.rb"
 require "sass"
+require "pry"
 
 enable :sessions
 
@@ -22,11 +25,11 @@ helpers do
     end
   end
   
-  def user_session_check
-    if not session[:user]
-      redirect "/"
-    end
-  end
+  # def user_session_check
+  #   if not session[:user]
+  #     redirect "/"
+  #   end
+  # end
   
   def current_user 
     if session[:user]
@@ -39,6 +42,22 @@ helpers do
     return "data:"+ "image/png" + ";base64," + base64
   end
   
+  def like_bg_color(isLiked)
+    if isLiked
+      return "rgb(239, 71, 111)"
+    else 
+      return "white"
+    end
+  end
+  
+  def like_tx_color(isLiked)
+    if isLiked
+      return "white"
+    else 
+      return "rgb(239, 71, 111)"
+    end
+  end
+  
 end
 
 not_found do
@@ -46,6 +65,13 @@ not_found do
 end
 
 # get requests -------
+
+# get "/delete" do
+#   logger.info Like.all
+  # slim :index
+  # slim :newpost
+  # binding.pry
+# end
 
 # main page
 get "/" do
@@ -174,8 +200,27 @@ post "/search" do
     end
   end
   @posts = @posts.order(id: :DESC)
-  slim :index
+  slim :searchResult
 end
+
+post "/like/:post_id" do
+  logger.info session[:user]
+  logger.info params[:post_id]
+  if Like.find_by(user_id: session[:user], post_id: params[:post_id]).present?
+    Like.find_by(user_id: session[:user], post_id: params[:post_id]).destroy
+    return false
+  else
+    Like.create(
+      user_id: session[:user],
+      post_id: params[:post_id]
+    )
+    return true
+  end
+  logger.info Like.all
+end
+
+
+
 
 # sass -------
 
@@ -201,4 +246,8 @@ end
 
 get "/sass/index.css" do
   sass :'sass/index'
+end
+
+get "/sass/searchResult.css" do
+  sass :'sass/searchResult'
 end

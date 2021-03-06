@@ -37,8 +37,13 @@ html lang="ja"
                 input type="submit" value="投稿" class="newPostButton"
               img src="/img/testImage.png" class="profileImage"
               .profileDropdownContainer
+                hr.line
                 form action="/logout" method="post"
                   input type="submit" value="ログアウト" class="logoutButton"
+                hr.line
+                form action="/#{current_user.name}" method="get"
+                  input type="submit" value="マイページ" class="userpageButton"
+                hr.line
             - else 
               form action="/signup" method="get"
                 input type="submit" value="新規登録" class="signupButton"
