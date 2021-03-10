@@ -103,5 +103,23 @@ window.onload = function() {
     document.execCommand("copy")
     document.body.removeChild(input);
   })
+  
+  $(document).on("keydown", ".content", function(e) {
+    if (e.key === "Tab") {
+      e.preventDefault()
+      
+      var start = $(this)[0].selectionStart;
+      var end = $(this)[0].selectionEnd;
+
+      // set textarea value to: text before caret + tab + text after caret
+      $(this).val($(this).val().substring(0, start)
+                  + "\t"
+                  + $(this).val().substring(end));
+
+      // put caret at right position again
+      this.selectionStart = start + 1;
+      this.selectionEnd = start + 1;
+    }
+  })
 }
 

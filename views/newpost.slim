@@ -1,13 +1,15 @@
 link rel="stylesheet" href="/sass/newpost.css"
 
-.mainContent
-  form action="/#{current_user.id}/post/new" method="post"
-    input.title type="text" name="title" placeholder="title"
-    input.language type="text" name="language" placeholder="language"
-    input.language-version type="text" name="language_version" placeholder="language version"
-    input.framework type="text" name="framework" placeholder="framework dependency"
-    input.inputs type="text" name="inputs" placeholder="inputs"
-    input.outputs type="text" name="outputs" placeholder="output type"
-    textarea.content name="content" placeholder="code"
-    textarea.description name="description" placeholder="description"
-    input type="submit" value="投稿"
+.mainWrapper
+  .mainContent
+    h1 新規投稿を作成
+    form action="/#{current_user.id}/post/new" method="post"
+      input.title type="text" name="title" placeholder="投稿のタイトル"
+      input.language type="text" name="language" placeholder="プログラムの言語"
+      input.language-version type="text" name="language_version" placeholder="言語のバージョン"
+      input.framework type="text" name="framework" placeholder="依存フレームワーク"
+      input.inputs type="text" name="inputs" placeholder="引数（他の人がわかるように引数の名前と型情報を書いてください）"
+      input.outputs type="text" name="outputs" placeholder="出力の型"
+      textarea.content name="content" placeholder="プログラム（ここにペーストしてください）"
+      textarea.description name="description" placeholder="説明文"
+      input.submitButton type="submit" value="投稿"

@@ -1,9 +1,31 @@
 
+$mainColor: rgb(239, 71, 111)
+$whiteColor: #E3E4DB
+$mainFont: a-otf-ud-reimin-pr6n, sans-serif
 
-.mainContent
-  form
-    display: flex
-    flex-direction: column
-    width: 1200px
-    input, textarea 
-      margin: 3px 0
+$navigationSmallWrapperHeight: 32px
+$mainWidth: 1200px
+
+.mainWrapper
+  display: flex
+  align-items: flex-start
+  justify-content: center
+  .mainContent
+    h1
+      margin-top: 40px
+    form
+      display: flex
+      flex-direction: column
+      width: 1200px
+      input, textarea 
+        margin: 3px 0
+        font-family: monospace
+      input
+        height: 40px
+        font-size: 22px
+      textarea
+        height: 120px 
+        font-size: 22px
+      .submitButton
+        background-color: $mainColor
+        color: white
