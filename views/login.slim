@@ -1,7 +1,10 @@
 link rel="stylesheet" href="/sass/login.css"
 
-form.loginForm action="/login" method="post"
-  input type="text" name="username" placeholder="username"
-  input type="password" name="password" placeholder="password"
-  input type="submit" value="ログイン"
+.mainWrapper
+  .mainContent
+    h1 ログイン
+    form.loginForm action="/login" method="post"
+      input type="text" name="username" placeholder="username"
+      input type="password" name="password" placeholder="password"
+      input.submitButton type="submit" value="ログイン"
   
