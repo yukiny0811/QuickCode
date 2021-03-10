@@ -11,7 +11,7 @@ require "./models/follow.rb"
 
 # load modules
 require "sass"
-require "pry"
+require "pry" if development?
 
 # configs
 enable :sessions
