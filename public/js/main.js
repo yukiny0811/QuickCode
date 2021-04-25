@@ -17,6 +17,7 @@ window.onload = function() {
     $(".searchOptionContainer").css("display", "none")
   })
   
+
   $(document).on("click", ".likeButton", function() {
     let id = parseInt($(this).attr("id"))
     console.log($(this).css("background-color"))
